@@ -1,6 +1,5 @@
 [build]
 builder = "nixpacks"
-builder = "nixpacks"
 
 [build.args]
 NODE_VERSION = "18"
