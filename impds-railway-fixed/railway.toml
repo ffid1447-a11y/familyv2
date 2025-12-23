@@ -1,0 +1,31 @@
+[build]
+builder = "nixpacks"
+builder = "nixpacks"
+
+[build.args]
+NODE_VERSION = "18"
+PYTHON_VERSION = "3.11"
+
+# Install commands
+[build.phases.setup]
+cmds = [
+  "apk add --no-cache python3 py3-pip",
+  "python3 -m venv /app/venv",
+  "source /app/venv/bin/activate",
+  "pip install --upgrade pip"
+]
+
+[build.phases.install]
+cmds = [
+  "npm install",
+  "source /app/venv/bin/activate && pip install -r requirements.txt"
+]
+
+[deploy]
+startCommand = "node server.js"
+healthcheckPath = "/health"
+healthcheckTimeout = 30
+
+[environment]
+PORT = "3000"
+NODE_ENV = "production"
